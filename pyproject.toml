@@ -4,22 +4,21 @@ build-backend = "hatchling.build"
 
 [project]
 name = "hindex"
-version = "0.1.0"
+version = "0.1.1"
 description = "A Python package for computing bibliometric indices (h-index, g-index, i10-index, and more)"
 readme = "README.md"
 license = "MIT"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering",
     "Typing :: Typed",
 ]
@@ -31,7 +30,41 @@ Repository = "https://github.com/gxlarson/hindex"
 Issues = "https://github.com/gxlarson/hindex/issues"
 
 [project.optional-dependencies]
-dev = ["pytest>=7.0"]
+dev = ["pytest>=7.0", "ruff>=0.3", "mypy>=1.0"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "F",    # pyflakes
+    "I",    # isort (import sorting)
+    "UP",   # pyupgrade (flag/modernize for the py310 target)
+    "B",    # flake8-bugbear (likely bugs)
+    "SIM",  # flake8-simplify
+    "D",    # pydocstyle (docstring conventions)
+]
+ignore = [
+    "D104",  # missing docstring in public package (__init__.py)
+    "D107",  # missing docstring in __init__ method
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D"]  # don't require docstrings in tests
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["hindex"]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false  # test functions don't need annotations

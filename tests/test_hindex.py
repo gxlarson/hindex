@@ -4,17 +4,18 @@ Tests cover all index calculation functions with edge cases,
 typical inputs, and boundary conditions.
 """
 
-import pytest
 from math import sqrt
 
+import pytest
+
 from hindex import (
-    h_index,
-    normalized_h_index,
-    i10_index,
-    o_index,
-    g_index,
-    w_index,
     e_index,
+    g_index,
+    h_index,
+    i10_index,
+    normalized_h_index,
+    o_index,
+    w_index,
 )
 
 
@@ -162,7 +163,7 @@ class TestGIndex:
             ([1], 1),
             ([4], 1),  # 1 paper, g cannot exceed paper count
             ([9], 1),  # 1 paper, g cannot exceed paper count
-            ([1, 1, 1, 1], 1),  # cumulative 4, but g=2 needs 4 citations and top 2 only have 2
+            ([1, 1, 1, 1], 1),  # cumulative 4, but g=2 needs top 2 to sum to 4
             ([10, 10, 10], 3),  # 3 papers, cumulative 30 >= 9
             ([25, 8, 5, 3, 3], 5),  # 5 papers, cumulative 44 >= 25
             ([100], 1),  # 1 paper, g cannot exceed paper count

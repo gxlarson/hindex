@@ -13,11 +13,11 @@ __all__ = [
 ]
 
 from .hindex import (
-    h_index,
-    normalized_h_index,
-    i10_index,
-    o_index,
-    g_index,
-    w_index,
     e_index,
+    g_index,
+    h_index,
+    i10_index,
+    normalized_h_index,
+    o_index,
+    w_index,
 )

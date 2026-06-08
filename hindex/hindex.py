@@ -5,10 +5,9 @@ including the h-index and related variants.
 """
 
 from math import sqrt
-from typing import List, Tuple
 
 
-def _sorted_and_h(in_list: List[int]) -> Tuple[List[int], int]:
+def _sorted_and_h(in_list: list[int]) -> tuple[list[int], int]:
     """Sort the list and compute h-index in a single pass.
 
     Args:
@@ -29,7 +28,7 @@ def _sorted_and_h(in_list: List[int]) -> Tuple[List[int], int]:
     return sorted_list, h
 
 
-def h_index(in_list: List[int]) -> int:
+def h_index(in_list: list[int]) -> int:
     """Calculate the h-index from a list of citation counts.
 
     The h-index is defined as the maximum value h such that the author
@@ -49,7 +48,7 @@ def h_index(in_list: List[int]) -> int:
     return h
 
 
-def normalized_h_index(in_list: List[int], scale: float) -> float:
+def normalized_h_index(in_list: list[int], scale: float) -> float:
     """Calculate the h-index normalized by a scale factor.
 
     Useful for comparing researchers across different career lengths
@@ -69,7 +68,7 @@ def normalized_h_index(in_list: List[int], scale: float) -> float:
     return h / float(scale)
 
 
-def i10_index(in_list: List[int]) -> int:
+def i10_index(in_list: list[int]) -> int:
     """Calculate the i10-index from a list of citation counts.
 
     The i10-index is the number of publications with at least 10 citations.
@@ -88,7 +87,7 @@ def i10_index(in_list: List[int]) -> int:
     return sum(1 for count in in_list if count >= 10)
 
 
-def o_index(in_list: List[int]) -> float:
+def o_index(in_list: list[int]) -> float:
     """Calculate the o-index from a list of citation counts.
 
     The o-index is the geometric mean of the h-index and the maximum
@@ -110,7 +109,7 @@ def o_index(in_list: List[int]) -> float:
     return sqrt(sorted_list[0] * h)
 
 
-def g_index(in_list: List[int]) -> int:
+def g_index(in_list: list[int]) -> int:
     """Calculate the g-index from a list of citation counts.
 
     The g-index is the largest number g such that the top g publications
@@ -130,8 +129,8 @@ def g_index(in_list: List[int]) -> int:
     if not in_list:
         return g
     tally = 0
-    for i, count in enumerate(sorted(in_list, reverse=True)):
-        if (tally + count) >= (g+1)**2:
+    for count in sorted(in_list, reverse=True):
+        if (tally + count) >= (g + 1) ** 2:
             tally += count
             g += 1
         else:
@@ -139,7 +138,7 @@ def g_index(in_list: List[int]) -> int:
     return g
 
 
-def w_index(in_list: List[int]) -> int:
+def w_index(in_list: list[int]) -> int:
     """Calculate the w-index from a list of citation counts.
 
     The w-index counts publications meeting escalating citation thresholds:
@@ -167,7 +166,7 @@ def w_index(in_list: List[int]) -> int:
     return w
 
 
-def e_index(in_list: List[int]) -> float:
+def e_index(in_list: list[int]) -> float:
     """Calculate the e-index from a list of citation counts.
 
     The e-index measures the excess citations received by the h-core
